@@ -25,6 +25,9 @@ class Schedule
     end
 
     def schedule_talk(talk)
+        if talk.duration > $afternoon_duration
+            raise ArgumentError, "Cannot schedule talks longer than #{$afternoon_duration} minutes"
+        end
         if !talk.nil?
             @tracks.each { |track|
                 if track.can_add_talk? talk
